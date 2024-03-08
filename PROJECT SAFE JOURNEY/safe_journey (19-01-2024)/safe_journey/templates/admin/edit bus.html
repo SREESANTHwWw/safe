@@ -1,0 +1,55 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form action="/myapp/edit_bus_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <table class="table table-bordered">
+      {% csrf_token %}
+    <tr>
+        <input type="hidden" name="id1" value="{{ data1.id }}">
+
+      <th width="180px ">Bus number</th>
+      <td>
+      <input type="number" pattern="[0-9]" name="textfield1" id="textfield1" value="{{ data1.Bus_number }}" class="form-control" required  title="Please match the requested format"/></td>
+    </tr>
+    <tr>
+      <th>Bus type</th>
+      <td>
+        <select name="select" id="select"class="form-control">
+            <option value="{{ data1.id }}">{{ data1.Bus_type }}</option>
+            <option value="BUS">BUS</option>
+            <option value="VAN">VAN</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th>Total seat</th>
+      <td>
+      <input type="number"  name="textfield2" pattern="[0-9]" id="textfield2" value="{{ data1.Total_seat }}" class="form-control"   title="Please match the requested format"/></td>
+    </tr>
+    <tr>
+      <th>Photo</th>
+      <td>
+          <img src="{{ data1.Photo }}"height="200" width="250">
+      <input type="file" name="fileField3" id="fileField3" class="form-control" title="Please match the requested format"/></td>
+    </tr>
+    <tr>
+      <th>Chasis number</th>
+      <td>
+      <input type="text" name="textfield4" id="textfield4" value="{{ data1.Chasis_number }}" class="form-control"  title="Please match the requested format"/></td>
+    </tr>
+    <tr>
+      <th>Driver</th>
+      <td>
+        <select name="select2" id="select2"class="form-control">
+        <option value="{{ data1.DRIVER.id }}">{{ data1.DRIVER.Name }}</option>
+            {% for i in data %}
+
+            <option value="{{ i.id }}">{{ i.Name }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td align="center"><input type="submit" name="button" id="button" value="update" class="btn btn-success"/></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

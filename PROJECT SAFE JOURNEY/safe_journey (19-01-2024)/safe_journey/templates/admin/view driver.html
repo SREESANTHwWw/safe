@@ -1,0 +1,40 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_driver_post/#abc">
+    {% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <td >
+      <input type="text" name="textfield"  placeholder="Search with driver name" id="textfield" class="form-control"/></td>
+      <td ><input type="submit" name="button"class="btn btn-success"id="button" value="SEARCH" /></td>
+    </tr>
+  </table><br>
+<table class="table table-bordered">
+    <tr>
+      <th>S/NO</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Contact</th>
+      <th>Experience</th>
+      <th>Licence Number</th>
+      <th>&nbsp;DOB</th>
+      <th>&nbsp;gender</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td width="50px">{{ forloop.counter }}</td>
+      <td>{{ i.Name }}
+      <br><img src="{{ i.photo}}" width="200px" height="200px" alt=""/></td>
+      <td>{{ i.House_name }}<br>{{ i.Place }}<br>{{ i.Post }}<br>{{ i.Pin }}</td>
+      <td>{{ i.Phone_number }}<br>
+      {{ i.E_mail }}</td>
+      <td>{{ i.Experience }}</td>
+      <td>{{ i.Licence_number }}</td>
+      <td>{{ i.DOB}}</td>
+      <td>{{ i.Gender}}</td>
+      <td><a href="/myapp/edit_driver/{{ i.id }}"class="btn btn-success">Edit</a></td>
+      <td><a href="/myapp/delete_driver/{{ i.id }}"class="btn btn-danger" onclick="return confirm('Are you sure')">Delete</a></td>
+    </tr>{% endfor %}
+  </table>
+</form>
+{% endblock %}

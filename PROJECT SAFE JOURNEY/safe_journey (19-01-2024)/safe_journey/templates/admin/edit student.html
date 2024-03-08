@@ -1,0 +1,74 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/edit_student_post/">
+        {% csrf_token %}
+    <input type="hidden" name="id" value="{{ data.id }}">
+<table class="table table-bordered">
+  <tr>
+    <th width="180px ">Name</th>
+    <td>
+      <input type="text" pattern="[A-Z a-z .]+" class="form-control" name="textfield" id="textfield" value="{{ data.Name }}"/></td>
+  </tr>
+  <tr>
+    <th>Place</th>
+    <td>
+      <input type="text" pattern="[A-Z a-z .]+" class="form-control" name="textfield2" id="textfield2"  value="{{ data.Place }}" /></td>
+  </tr>
+  <tr>
+    <th>Post</th>
+    <td>
+      <input type="text" pattern="[A-Z a-z .]+" class="form-control" name="textfield3" id="textfield3" value="{{ data.Post }}" /></td>
+  </tr>
+  <tr>
+    <th>Pin</th>
+    <td>
+      <input type="number" pattern="[0-9]{6}" class="form-control" name="textfield4" id="textfield4" value="{{ data.Pin }}" /></td>
+  </tr>
+  <tr>
+    <th>House Name</th>
+    <td>
+      <input type="text" pattern="[A-Z a-z .]+" class="form-control" name="textfield5" id="textfield5" value="{{ data.House_name }}" /></td>
+  </tr>
+  <tr>
+    <th>Parent Name</th>
+    <td>
+      <input type="text" pattern="[A-Z a-z .]+" class="form-control" name="textfield6" id="textfield6"  value="{{ data.Parent_name }}"/></td>
+  </tr>
+  <tr>
+    <th>Parent Number</th>
+    <td>
+      <input type="number" pattern="[0-9]" class="form-control" name="textfield7" id="textfield7" value="{{ data.Parent_number }}" /></td>
+  </tr>
+  <tr>
+    <th>Register Number</th>
+    <td>
+      <input type="number" pattern="[0-9]" class="form-control" name="textfield8" id="textfield8" value="{{ data.Register_number }}" /></td>
+  </tr>
+  <tr>
+    <th>Gender</th>
+    <td><input type="radio" name="radio" id="radio" value="MALE" {% if data.Gender == 'MALE' %}checked{% endif %} />Male<br>
+        <input type="radio" name="radio" id="radio" value="FEMALE" {% if data.Gender == 'FEMALE' %}checked{% endif %} />Female</td>
+  </tr>
+  <tr>
+    <th>Phone Number</th>
+    <td>
+      <input type="number" class="form-control"name="textfield9" id="textfield9" value="{{ data.Phone_number }}" pattern="[6789][0-9]{9}"/></td>
+  </tr>
+  <tr>
+    <th>E mail</th>
+    <td>
+      <input type="email"class="form-control" name="textfield10" id="textfield10" value="{{ data.E_mail }}" /></td>
+  </tr>
+<tr>
+    <th>Fee</th>
+    <td>
+      <input type="text"class="form-control" name="textfield11" id="textfield11" value="{{ data.Fee }}" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center"><input type="submit" name="button" id="button" value="Submit" class="btn btn-success"/></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</form>
+{% endblock %}

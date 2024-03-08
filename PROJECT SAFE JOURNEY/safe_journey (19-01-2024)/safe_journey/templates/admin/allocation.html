@@ -1,0 +1,35 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+
+<form id="form1" name="form1" method="post" action="/myapp/allocation_post/#abc">
+ {% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <td >
+      <input type="text" name="textfield"  placeholder="Search with bus number" id="textfield" class="form-control"/></td>
+      <td ><input type="submit" name="button"class="btn btn-success"id="button" value="SEARCH" /></td>
+    </tr>
+  </table><br>
+<table class="table table-bordered">
+    <tr>
+      <th width="180px ">S/NO</th>
+      <th>BUS info</th>
+      <th>STUDENT info</th>
+      <td>&nbsp;</td>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.BUS.Bus_number }}<br>
+      {{ i.BUS.Bus_type }}</td>
+      <td>{{ i.STUDENT.Name }}
+      <br>{{ i.STUDENT.Register_number }}</td>
+{#      <td><a href="/myapp/send_payment_notification/{{ i.id }}"class="btn btn-primary">send payment notification</a></td>#}
+{#    <td><a href="/myapp/view_payment_notification/{{ i.id }}"class="btn btn-primary">view payment notification</a></td>#}
+    <td><a href="/myapp/edit_student_allocation/{{ i.id }}#abc"class="btn btn-success">edit</a></td>
+    <td><a href="/myapp/delete_student_allocation/{{ i.id }}" onclick="return confirm('are you sure?')"class="btn btn-danger">delete</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

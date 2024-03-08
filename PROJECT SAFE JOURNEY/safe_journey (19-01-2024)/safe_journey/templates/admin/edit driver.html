@@ -1,0 +1,75 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/edit_driver_post/" enctype="multipart/form-data">
+        {% csrf_token %}
+ <input type="hidden" name="id" value="{{ data.id }}">
+<table class="table table-bordered ">
+  <tr>
+    <th width="180px ">Name</th>
+    <td>
+      <input type="text"pattern="[A-Z a-z .]+" name="textfield" id="textfield" value="{{ data.Name }}" class="form-control" title="Please match the requested format"/></td>
+  </tr>
+  <tr>
+    <th>Place</th>
+    <td>
+      <input type="text"pattern="[A-Z a-z .]+" name="textfield2" id="textfield2" value="{{ data.Place }}" class="form-control"  title="Please match the requested format"/></td>
+  </tr>
+  <tr>
+    <th>Post</th>
+    <td>
+      <input type="text"pattern="[A-Z a-z .]+" name="textfield3" id="textfield3"value="{{ data.Post }}" class="form-control"  title="Please match the requested format" /></td>
+  </tr>
+  <tr>
+    <th>Pin</th>
+    <td>
+      <input type="number"pattern="[0-9]{6}" name="textfield4" id="textfield4"value="{{ data.Pin }}" class="form-control"  title="Please match the requested format"/></td>
+  </tr>
+  <tr>
+    <th>House Name</th>
+    <td>
+      <input type="text"pattern="[A-Z a-z .]+" name="textfield5" id="textfield5"value="{{ data.House_name }}" class="form-control"  title="Please match the requested format" /></td>
+  </tr>
+  <tr>
+    <th>Phone Number</th>
+    <td>
+      <input type="number" name="textfield6" id="textfield6"value="{{ data.Phone_number }}" class="form-control" required pattern="[6789][0-9]{9}" /></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td>
+      <input type="email" name="textfield7" id="textfield7"value="{{ data.E_mail }}" class="form-control"  title="Please match the requested format"/></td>
+  </tr>
+  <tr>
+    <th>Experience</th>
+    <td>
+      <input type="text" name="textfield8" id="textfield8" value="{{ data.Experience }}" class="form-control"  title="Please match the requested format"/></td>
+  </tr>
+    </tr>
+  <tr>
+    <th>Licence number</th>
+    <td>
+      <input type="text" name="textfield9" id="textfield9" value="{{ data.Licence_number }}" class="form-control"  title="Please match the requested format"/></td>
+  </tr></tr>
+  <tr>
+    <th>photo</th>
+    <td><img src="{{ data.photo }}" height="60px" width="60px">
+      <input type="file" name="textfield10" id="textfield10" class="form-control"/></td>
+  </tr>
+    <tr>
+    <th>DOB</th>
+    <td>
+      <input type="date" name="textfield11" id="textfield11" class="form-control" value="{{ data.DOB | date:'Y-m-d' }}"/></td>
+  </tr>
+  <tr>
+    <th>Gender</th>
+    <td><input type="radio" name="radio" id="radio" value="MALE" {% if data.Gender == 'MALE' %}checked{% endif %} />Male<br>
+        <input type="radio" name="radio" id="radio" value="FEMALE" {% if data.Gender == 'FEMALE' %}checked{% endif %} />Female</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center"><input type="submit" name="button" id="button" value="submit" class="btn btn-success"/></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_bus_post/#abc">
+    {% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <td >
+      <input type="text" name="textfield"  placeholder="Search with bus number" id="textfield" class="form-control"/></td>
+      <td ><input type="submit" name="button"class="btn btn-success"id="button" value="SEARCH" /></td>
+    </tr>
+  </table><br>
+<table class="table table-bordered">
+    <tr>
+      <th>S/NO</th>
+      <th>Bus Number</th>
+      <th>Bus Type</th>
+      <th>Total Seat</th>
+      <th>Photo</th>
+      <th>Chasis number</th>
+      <th>Driver</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td width="50px">&nbsp;{{ forloop.counter }}</td>
+      <td>&nbsp;{{ i.Bus_number }}</td>
+      <td>&nbsp;{{ i.Bus_type }}</td>
+      <td>&nbsp;{{ i.Total_seat }}</td>
+      <td><img src="{{ i.Photo}}" width="200px" height="200px" alt=""/></td>
+      <td>&nbsp;{{ i.Chasis_number }}</td>
+      <td>&nbsp;{{ i.DRIVER.Name }}</td>
+      <td><a href="/myapp/edit_bus/{{ i.id }}" class="btn btn-success">Edit</a></td>
+      <td><a href="/myapp/delete_bus/{{ i.id }}"class="btn btn-danger" onclick="return confirm('Are you sure')">Delete</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

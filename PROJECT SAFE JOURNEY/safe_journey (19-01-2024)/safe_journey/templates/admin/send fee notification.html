@@ -1,0 +1,56 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/send_feenotificationpost/">
+    {% csrf_token %}
+  <table class="table table-bordered">
+    <tr>
+      <th width="180px ">Month</th>
+      <td>
+          <select name="month" class="form-control">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <td>
+      <select name="year" class="form-control">
+
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+      </select>
+
+      </td>
+    </tr>
+    <tr>
+      <th>Last date</th>
+      <td>
+      <input type="date"class="form-control"   name="textfield3" id="textfield3" /></td>
+    </tr>
+
+
+
+
+    <tr>
+      <td>&nbsp;</td>
+      <td align="center" colspan="2"><input type="submit" name="button" class="btn btn-success"id="button" value="SEND" /></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="/myapp/add_bus_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <table class="table table-bordered">
+      {% csrf_token %}
+    <tr>
+      <th width="180px ">Bus number</th>
+      <td>
+      <input type="number" pattern="[0-9]" name="textfield1" class="form-control" id="textfield1" required /></td>
+    </tr>
+    <tr>
+      <th>Bus type</th>
+      <td>
+        <select name="select" id="select" class="form-control ">
+            <option value="BUS">BUS</option>
+            <option value="VAN">VAN</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th>Total seat</th>
+      <td>
+      <input type="number"pattern="[0-9]" name="textfield2" class="form-control" id="textfield2" required/></td>
+    </tr>
+    <tr>
+      <th>Photo</th>
+      <td>
+      <input type="file" name="fileField3" id="fileField3" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th>Chasis number</th>
+      <td>
+      <input type="text" name="textfield4" id="textfield4" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th>Driver</th>
+      <td>
+        <select name="select2" id="select2" class="form-control">
+            {% for i in data %}
+            <option value="{{ i.id }}">{{ i.Name }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2" ><input type="submit" name="button" class="btn btn-success" id="button" value="Submit" /></td>
+    </tr>
+  </table>
+</form>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

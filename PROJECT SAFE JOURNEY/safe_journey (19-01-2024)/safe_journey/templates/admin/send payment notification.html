@@ -1,0 +1,27 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/send_payment_notification_post/{{ id }}">
+    {% csrf_token %}
+  <table class="table table-bordered">
+    <tr>
+      <td width="180px ">Month</td>
+      <td>
+      <input type="month" name="textfield" class="form-control" id="textfield" /></td>
+    </tr>
+    <tr>
+      <td>Fee</td>
+      <td>
+      <input type="text" name="textfield2" class="form-control"id="textfield2" /></td>
+    </tr>
+    <tr>
+      <td>Last Date</td>
+      <td>
+      <input type="date" name="textfield3" class="form-control"id="textfield3" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" class="btn btn-success"name="button" id="button" value="Submit" /></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

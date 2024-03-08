@@ -1,0 +1,51 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_complaint_and_send_reply_post/#abc">
+    {% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <th>From</th>
+      <th>
+      <input type="date" required class="form-control"name="textfield" id="textfield" /></th>
+      <th>To</th>
+      <td>
+      <input type="date" required class="form-control"name="textfield2" id="textfield2" /></td>
+      <td><input type="submit" name="button" id="button" value="SEARCH" class="btn btn-success" /></td>
+    </tr></table><br>
+
+</form>
+<table class="table table-bordered">
+    <tr>
+      <th>S/NO</th>
+      <th>Complaint</th>
+      <th>Date</th>
+      <th>Student Name</th>
+      <th>Status</th>
+        <th>Reply</th>
+    </tr>
+            {% for i in data %}
+
+    <tr>
+      <td width="50px">{{forloop.counter}}</td>
+      <td>{{i.Complaint}}</td>
+      <td>{{i.Date }}</td>
+      <td>{{i.STUDENT.Name }}</td>
+        <td>{{ i.Status }}</td>
+    <td>
+        {% if i.Status == 'pending'  %}
+            <a href="/myapp/send_reply/{{ i.id }}#abc" class="btn btn-info">reply</a>
+                {% csrf_token %}
+                <input type="hidden" name="id1" value="{{ i.id }}">
+            {% else %}
+
+{#      <textarea name="textarea" id="textarea" class="form-control" required cols="45" rows="5"></textarea></td>#}
+{#                  <td colspan="2" align="center"><input type="submit" class="btn btn-info" name="button2" id="button2" value="Send" /></td>#}
+{#        {%  else  %}#}
+    {{ i.Reply }}</td>
+    {%  endif %}
+    </tr>
+      {% endfor %}
+
+  </table>
+</form>
+{% endblock %}

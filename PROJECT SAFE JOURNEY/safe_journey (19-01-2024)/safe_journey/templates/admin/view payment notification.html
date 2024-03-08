@@ -1,0 +1,32 @@
+{% extends 'admin/adminindex.html' %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_payment_notification_post/#abc">
+    {% csrf_token %}
+  <table class="table table-bordered ">
+    <tr>
+      <td colspan="1">Month</td>
+      <td colspan="2">
+      <input type="month"class="form-control" name="textfield" id="textfield" /></td>
+      <td colspan="3"><input type="submit" class="btn btn-success"name="button" id="button" value="SEARCH" /></td>
+    </tr><br>
+    <tr>
+      <th>S/NO</th>
+      <th>Student Details</th>
+      <th>Month</th>
+      <th>Fee</th>
+      <th>Last Date</th>
+      <th>Status</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td width="50px">{{ forloop.counter }}</td>
+      <td>{{ i.STUDENT.Name }}</td>
+      <td>{{ i.Month }}</td>
+      <td>{{ i.Fee}}</td>
+      <td>{{ i.Last_date }}</td>
+      <td>{{ i.Status }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}
