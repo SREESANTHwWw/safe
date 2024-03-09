@@ -6,15 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:location/location.dart';
 import 'package:safe_journey/Driver/Driver_home.dart';
+import 'package:safe_journey/const.dart';
 import 'package:safe_journey/parent/parenthome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../main.dart';
-
-void main() {
-  runApp(const MainApp());
-}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -47,8 +44,8 @@ class _LoginState extends State<login_new_full> {
       SharedPreferences sh = await SharedPreferences.getInstance();
       String ltype = sh.getString('ltype').toString();
       if (ltype == 'driver') {
-        updatelocation();
-        updatebackgroundlocation();
+        // updatelocation();
+        // updatebackgroundlocation();
       }
     });
   }
@@ -61,20 +58,14 @@ class _LoginState extends State<login_new_full> {
   bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
-    
-
     return WillPopScope(
       onWillPop: () async {
         Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => MyIpPage(),
-              
-    
             ));
 
-      final sh = await SharedPreferences.getInstance();
-      sh.setString('url', 'http://127.0.0.1:8000');
         return false;
       },
       child: Scaffold(
@@ -214,8 +205,13 @@ class _LoginState extends State<login_new_full> {
                             FadeInUp(
                                 duration: Duration(milliseconds: 1600),
                                 child: MaterialButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formkey.currentState!.validate()) {
+                                       SharedPreferences sh = await SharedPreferences.getInstance();
+                                       sh.setString(
+                                          'url', baseUrl);
+
+                                      print(sh.getString('url'));
                                       senddata();
                                     }
                                   },
@@ -254,42 +250,42 @@ class _LoginState extends State<login_new_full> {
 
   Location location = new Location();
 
-  void updatelocation() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    LocationData _locationData;
+  // void updatelocation() async {
+  //   bool _serviceEnabled;
+  //   PermissionStatus _permissionGranted;
+  //   LocationData _locationData;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
+  //   _serviceEnabled = await location.serviceEnabled();
+  //   if (!_serviceEnabled) {
+  //     _serviceEnabled = await location.requestService();
+  //     if (!_serviceEnabled) {
+  //       return;
+  //     }
+  //   }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    _locationData = await location.getLocation();
-    location.enableBackgroundMode(enable: true);
+  //   _permissionGranted = await location.hasPermission();
+  //   if (_permissionGranted == PermissionStatus.denied) {
+  //     _permissionGranted = await location.requestPermission();
+  //     if (_permissionGranted != PermissionStatus.granted) {
+  //       return;
+  //     }
+  //   }
+  //   _locationData = await location.getLocation();
+  //   location.enableBackgroundMode(enable: true);
 
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      setState(() {
-        latitude = currentLocation.latitude.toString();
-        longitude = currentLocation.longitude.toString();
-      });
-    });
+  //   location.onLocationChanged.listen((LocationData currentLocation) {
+  //     setState(() {
+  //       latitude = currentLocation.latitude.toString();
+  //       longitude = currentLocation.longitude.toString();
+  //     });
+  //   });
 
-    // setState(() {
-    //
-    //   latitude=_locationData.latitude.toString();
-    //   longitude=_locationData.longitude.toString();
-    // });
-  }
+  //   // setState(() {
+    
+  //   //   latitude=_locationData.latitude.toString();
+  //   //   longitude=_locationData.longitude.toString();
+  //   // });
+  // }
 
   String latitude = '';
   String longitude = '';
@@ -302,35 +298,35 @@ class _LoginState extends State<login_new_full> {
     super.dispose();
   }
 
-  void updatebackgroundlocation() async {
-    String latitude_ = latitude;
-    String longitude_ = longitude;
+  // void updatebackgroundlocation() async {
+  //   String latitude_ = latitude;
+  //   String longitude_ = longitude;
 
-    SharedPreferences sh = await SharedPreferences.getInstance();
-    String url = sh.getString('url').toString();
-    String lid = sh.getString('lid').toString();
+  //   SharedPreferences sh = await SharedPreferences.getInstance();
+  //   String url = sh.getString('url').toString();
+  //   String lid = sh.getString('lid').toString();
 
-    final urls = Uri.parse(url + "/myapp/update_location/");
+  //   final urls = Uri.parse(url + "/myapp/update_location/");
 
-    try {
-      final response = await http.post(urls, body: {
-        'latitude': latitude_,
-        'longitude': longitude_,
-        'lid': lid,
-      });
-      if (response.statusCode == 200) {
-        String status = jsonDecode(response.body)['status'];
-        if (status == 'ok') {
-        } else {
-          Fluttertoast.showToast(msg: 'Not Found');
-        }
-      } else {
-        Fluttertoast.showToast(msg: 'Network Error');
-      }
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
-    }
-  }
+  //   try {
+  //     final response = await http.post(urls, body: {
+  //       'latitude': latitude_,
+  //       'longitude': longitude_,
+  //       'lid': lid,
+  //     });
+  //     if (response.statusCode == 200) {
+  //       String status = jsonDecode(response.body)['status'];
+  //       if (status == 'ok') {
+  //       } else {
+  //         Fluttertoast.showToast(msg: 'Not Found');
+  //       }
+  //     } else {
+  //       Fluttertoast.showToast(msg: 'Network Error');
+  //     }
+  //   } catch (e) {
+  //     Fluttertoast.showToast(msg: e.toString());
+  //   }
+  // }
 
   void senddata() async {
     String username = _controllerUsername.text;
@@ -339,16 +335,22 @@ class _LoginState extends State<login_new_full> {
     SharedPreferences sh = await SharedPreferences.getInstance();
     String url = sh.getString('url').toString();
 
+    print("in function");
+
     final urls = Uri.parse(url + "/myapp/Login__post/");
+    print("in function out try");
 
     try {
       final response = await http.post(urls, body: {
         'uname': username,
         'password': password,
       });
+      print("in function in try");
       if (response.statusCode == 200) {
+        print("in function in 200");
         String status = jsonDecode(response.body)['status'];
         if (status == 'ok') {
+          print("in function in status ok");
           Fluttertoast.showToast(msg: 'Success');
           String type = jsonDecode(response.body)['type'];
 
@@ -365,6 +367,7 @@ class _LoginState extends State<login_new_full> {
             sh.setString("photo", photo);
             sh.setString("name", name);
             sh.setString("type", type);
+
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -386,9 +389,11 @@ class _LoginState extends State<login_new_full> {
                 ));
           }
         } else {
+          print("in function in non 200");
           Fluttertoast.showToast(msg: 'Not Found');
         }
       } else {
+        print("in function in non erro");
         Fluttertoast.showToast(msg: 'Network Error');
       }
     } catch (e) {

@@ -10,6 +10,7 @@ import 'package:safe_journey/Driver/view%20assigned%20bus.dart';
 import 'package:safe_journey/Driver/view%20check%20in%20report.dart';
 import 'package:safe_journey/Driver/view%20my%20sent%20msg%20to%20adminl.dart';
 import 'package:safe_journey/Driver/view%20my%20sent%20msg%20to%20parent.dart';
+import 'package:safe_journey/const.dart';
 import 'package:safe_journey/login.dart';
 import 'package:safe_journey/parent/loginmaindemo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -138,7 +139,7 @@ class _UserHomePageState extends State<UserHomePage> {
           String E_mail=jsonDecode(response.body)['E_mail'].toString();
           String Experience=jsonDecode(response.body)['Experience'].toString();
           String Licence_number=jsonDecode(response.body)['Licence_number'].toString();
-          String photo=url+jsonDecode(response.body)['photo'].toString();
+          String photo=baseUrl+jsonDecode(response.body)['photo'].toString();
           String DOB=jsonDecode(response.body)['DOB'].toString();
           String Gender=jsonDecode(response.body)['Gender'].toString();
 
@@ -203,10 +204,10 @@ class _UserHomePageState extends State<UserHomePage> {
               SizedBox(
                 height: 280,
                 width: double.infinity,
-                child: Image.network(
-                  photo_,
-                  fit: BoxFit.fill,
-                ),
+                // child: Image.network(
+                //   photo_,
+                //   fit: BoxFit.fill,
+                // ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(16.0, 240.0, 16.0, 16.0),
@@ -265,22 +266,22 @@ class _UserHomePageState extends State<UserHomePage> {
                             ],
                           ),
                         ),
-                        InkWell(
-                          onTap: (){
-                            showDialog(context: context, builder: (context) => Image.network(photo_),);
-                          },
-                          child: Container(
-                            height: 90,
-                            width: 90,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                image:  DecorationImage(
-                                    image: NetworkImage(
-                                        photo_),
-                                    fit: BoxFit.cover)),
-                            margin: EdgeInsets.only(left: 20.0),
-                          ),
-                        ),
+                        // InkWell(
+                        //   onTap: (){
+                        //     showDialog(context: context, builder: (context) => Image.network(photo_),);
+                        //   },
+                        //   child: Container(
+                        //     height: 90,
+                        //     width: 90,
+                        //     decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(20.0),
+                        //         image:  DecorationImage(
+                        //             image: NetworkImage(
+                        //                 photo_),
+                        //             fit: BoxFit.cover)),
+                        //     margin: EdgeInsets.only(left: 20.0),
+                        //   ),
+                        // ),
                       ],
                     ),
                     const SizedBox(height: 20.0),

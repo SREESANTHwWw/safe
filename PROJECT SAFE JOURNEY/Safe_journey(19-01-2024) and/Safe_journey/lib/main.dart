@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:animate_do/animate_do.dart';
@@ -24,7 +26,7 @@ class MainApp extends StatelessWidget {
           seedColor: const Color.fromRGBO(183, 176, 173, 1.0),
         ),
       ),
-      home: MyIpPage(),
+      home: login_new_full(),
     );
   }
 }
@@ -49,6 +51,7 @@ class _LoginState extends State<MyIpPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+
         Navigator.push(
             context,
             MaterialPageRoute(
